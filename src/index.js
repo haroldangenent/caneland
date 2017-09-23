@@ -16,9 +16,9 @@ const loop = () => {
   const now = Date.now()
   const delta = now - lastUpdate
 
-  world.reset()
-
   player.update(delta)
+
+  world.reset()
   player.draw()
 
   lastUpdate = now

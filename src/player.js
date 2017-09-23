@@ -2,18 +2,27 @@ import * as firebase from 'firebase'
 import randomEmoji from 'random-emoji'
 
 export default function createPlayer(world, keyHandler) {
-  const db = firebase.database()
-
-  const emoji = randomEmoji.random({ count: 1 }).shift()
-
-  const userId = db.ref('users').push().key
-  db.ref(`users/${userId}`).update({ name: emoji.name, char: emoji.character, score: 0 })
-
   let isJumping = true
   const size = 30
   const speed = 0.5
   const movement = { x: 0, y: 0 }
   const position = { x: 0, y: size }
+
+  const db = firebase.database()
+  const emoji = randomEmoji.random({ count: 1 }).shift()
+  const userId = db.ref('users').push().key
+  db.ref(`users/${userId}`).update({
+    char: emoji.character,
+    name: emoji.name,
+    position: position,
+    score: 0,
+  })
+
+  const savePosition = () => {
+    db.ref(`users/${userId}`).update({
+      position: position,
+    })
+  }
 
   return {
     draw() {
@@ -54,6 +63,8 @@ export default function createPlayer(world, keyHandler) {
       if (position.x >= (world.getWidth() - size)) {
         position.x = (world.getWidth() - size)
       }
+
+      savePosition()
     }
   }
 }
