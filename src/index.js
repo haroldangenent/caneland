@@ -1,5 +1,6 @@
 import * as firebase from 'firebase'
 import createPlayer from './player'
+import createPlayers from './players'
 import createWorld from './world'
 import createKeyHandler from './keyHandler'
 import env from '../env'
@@ -9,6 +10,7 @@ firebase.initializeApp(env.firebase)
 const keyHandler = createKeyHandler()
 const world = createWorld()
 const player = createPlayer(world, keyHandler)
+const players = createPlayers(world)
 
 let lastUpdate;
 
@@ -20,6 +22,7 @@ const loop = () => {
 
   world.reset()
   player.draw()
+  players.draw()
 
   lastUpdate = now
   requestAnimationFrame(loop)
