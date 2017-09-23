@@ -12,6 +12,7 @@ export default function createPlayer(world, keyHandler) {
   const emoji = randomEmoji.random({ count: 1 }).shift()
   const userId = db.ref('users').push().key
   db.ref(`users/${userId}`).update({
+    active: true,
     char: emoji.character,
     name: emoji.name,
     position: position,
