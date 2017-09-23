@@ -21,7 +21,6 @@ const loop = () => {
   player.update(delta)
 
   world.reset()
-  player.draw()
   players.draw()
 
   lastUpdate = now

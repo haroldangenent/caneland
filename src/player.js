@@ -25,10 +25,6 @@ export default function createPlayer(world, keyHandler) {
   }
 
   return {
-    draw() {
-      world.getContext().font = `${size}px sans-serif`
-      world.getContext().fillText(emoji.character, position.x, position.y)
-    },
     update(delta) {
       movement.x = 0
       movement.y += (delta / 30)
