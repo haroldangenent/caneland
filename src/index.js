@@ -29,3 +29,7 @@ const loop = () => {
 
 lastUpdate = Date.now()
 requestAnimationFrame(loop)
+
+window.onbeforeunload = () => {
+  player.destroy();
+}
